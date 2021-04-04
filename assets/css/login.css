@@ -1,0 +1,57 @@
+.form-container {
+    max-width: 500px;
+    height: 400px;
+    background: white;
+    margin: auto;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-container p {
+    margin: 0 0 15px 0;
+    padding: 3px;
+    font-size:larger;
+}
+
+.form-container input {
+    border-style: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0 5px 0;
+}
+
+.sign-in-section input:focus {
+    outline: none;
+}
+
+.btn-style{
+    display:inline-block;
+    text-align: center;
+    width: 100%;
+    color:white;
+    background-color:black;
+    padding: 10px 0;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    border:none;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-style:hover {
+    background-color:darkred;
+}
+
+.btn-style.btn-submit {
+    margin: 35px 0 10px 0;
+}
+
+#l-forgot-pass{
+    font-weight:lighter;
+    color:grey;
+}
