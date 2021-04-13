@@ -1,10 +1,10 @@
 # PerMa
 Smart Perfume Web Manager
 
-#Todo:
+# Todo:
 -Web Services
 -ProductPage
 -Database
 
-#Disclaimer proiect:
+# Disclaimer proiect:
 Momentan folosim jQuery in paginile proiectului web. Pana data viitoare vom modifica astfel incat sa nu mai folosim framework-uri.
