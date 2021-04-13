@@ -9,7 +9,13 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
+#nav > #loginHeaders {
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    width: 100%;
+    flex-wrap: nowrap;
+}
 .form-container p {
     margin: 0 0 15px 0;
     padding: 3px;
