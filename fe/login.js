@@ -11,6 +11,7 @@ function postObject(object){
     }).then(data => {
         localStorage.setItem('email',data.email);
         localStorage.setItem('username',data.username);
+        localStorage.setItem('isAdmin',data.isAdmin);
         window.location.href = '../index.html';
     });
 }

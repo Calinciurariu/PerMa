@@ -10,6 +10,7 @@ function postUser(obj){
         return resp.json();
     }).then(data => {
         console.log(data);
+        window.location.href = '../login.html';
     });
 }
 
@@ -32,7 +33,8 @@ function main(){
             firstname:frstName.value,
             lastname:lstName.value,
             password:pass.value,
-            birthdate:birth.value
+            birthdate:birth.value,
+            isAdmin:false,
         });
     });
 }
