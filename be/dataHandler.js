@@ -16,7 +16,6 @@ exports.DatabaseHandler = ()=>{
         },
         insertObject:async (toInsert)=>{
             let res = await collection.insertOne(toInsert);
-            console.log(res);
         },
         insertArray:async (toInsert)=>{
             await collection.insertMany(toInsert);
