@@ -10,8 +10,9 @@ app.get("/be/api/users", async (req, res) => {
 
 app.post("/be/api/register", async (req, res) => {
   await db.setCollection("Users");
-  if ((await db.query({ email: req.body.email })) === null) {
-    await db.insertObject(req.body);
+  console.log(req.body);
+  if ((await db.query({ email: req.body.email })) !== null) {
+    res.setStatusCode(400);
     res.send({status:"User already exists!"});
   }
   await db.insertObject(req.body);
@@ -20,9 +21,11 @@ app.post("/be/api/register", async (req, res) => {
 
 app.post("/be/api/login", async (req, res) => {
   await db.setCollection("Users");
+  console.log(req.body);
+  console.log(await db.query(req.body));
   if(await db.query(req.body) !== null){
       res.setStatusCode(200);
-      res.send({status:"Logged in!"});
+      res.send(await db.query(req.body));
   }
   res.setStatusCode(400);
   res.send({status:"Password or Username wrong!"});
