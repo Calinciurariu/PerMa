@@ -14,7 +14,7 @@ function App() {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Methods",
-      "POST,GET,PUT,DELETE,PATCH"
+      "POST,GET,PUT,DELETE,PATCH,OPTIONS"
     );
     if (req.method === "OPTIONS") {
       console.log("OPTIONS");
