@@ -10,7 +10,7 @@ function Response(res) {
     },
     send: (obj) => {
       res.write(JSON.stringify(obj));
-      res.end();
+      return res.end();
     },
   };
 }
