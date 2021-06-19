@@ -21,14 +21,26 @@ app.post("/be/api/register", async (req, res) => {
 
 app.post("/be/api/login", async (req, res) => {
   await db.setCollection("Users");
-  console.log(req.body);
-  console.log(await db.query(req.body));
+//   console.log(req.body);
+//   console.log(await db.query(req.body));
   if(await db.query(req.body) !== null){
       res.setStatusCode(200);
       res.send(await db.query(req.body));
   }
   res.setStatusCode(400);
   res.send({status:"Password or Username wrong!"});
+});
+
+app.put('/be/api/updatePassword', async (req,res)=>{
+    await db.setCollection("Users");
+    console.log(req.body);
+    if(await db.query(req.body.where) !== null){
+        await db.updateAt(req.body.where,req.body.fields);
+        res.setStatusCode(200);
+        res.send({status:"Password Changed!"});
+    }
+    res.setStatusCode(400);
+    res.send({status:"User not found!"});
 });
 
 app.listen(port, async () => {
