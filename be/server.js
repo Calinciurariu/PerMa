@@ -1,6 +1,6 @@
 const App = require("./app");
 const db = require("./dataHandler").DatabaseHandler();
-
+var mongodb = require('mongodb');
 const port = 8095;
 const app = App();
 
@@ -73,10 +73,78 @@ app.get('/be/api/stats/:format',async (req,res)=>{
     }
     res.setStatusCode(200);
     res.send([]);
+  });
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+
+app.get("/be/api/users",async (req,res)=>{
+    res.send({status:"UTILIZATORI!"});
+});
+
+app.get("/be/api/perfumes",async (req,res)=>{
+  if (db!==null){
+
+      await db.setCollection("Products");
+      let data = await db.queryAll();
+      console.log (data);
+
+      res.setStatusCode(200);
+
+      res.send(data);
+    }
+  res.setStatusCode(400);
+  res.send({status:"DB Error: Can't find the database"});
+});
+
+app.post("/be/api/addPerfume",async (req,res)=>{
+ 
+  if (db!==null){
+      await db.setCollection("Products");
+      var RandomObject = {
+        picture: "http://placehold.it/32x32",
+        isActive: true,
+        price: "$"+Math.floor((Math.random() * 250) + 50),
+        stockAvaliability: Math.floor((Math.random() * 500) + 1),
+        name: req.body.name,
+        popularity: Math.floor((Math.random() * 10) + 1),
+        dateAdded: 
+             Date.now(),
+       
+        tags: ["culpa", "sit", "esse"]
+    } ;
+      await db.insertObject(RandomObject);
+
+      res.setStatusCode(200);
+
+      res.send({status:"Added a product"});
+    }
+  res.setStatusCode(400);
+  res.send({status:"DB Error: Can't find the database"});
+});
+
+app.get("/be/api/perfume/:id",async (req,res)=>{
+  await db.setCollection("Products");
+  var query = { _id: mongodb.ObjectId(req.pathParams["id"])  };
+
+  var product = await db.query(query); 
+  
+
+  if(product!== null){
+    res.setStatusCode(200);
+    res.send(product);
+  }
+res.setStatusCode(400);
+res.send({status:"Couldn't find the product :("});
 });
 
 app.listen(port, async () => {
-  await db.setUpConnection("PerMa");
-  //   await db.setCollection("Useeeri");
+   await db.setUpConnection("PerMa");
   console.log(`Server listening at ${port}`);
-});
+ });
+

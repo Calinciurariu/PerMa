@@ -9,7 +9,8 @@ function Response(res) {
       res.statusCode = statusCode;
     },
     send: (obj) => {
-      res.end(JSON.stringify(obj));
+      res.write(JSON.stringify(obj));
+      res.end();
     },
   };
 }
