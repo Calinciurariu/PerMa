@@ -205,6 +205,45 @@ input, select, textarea {
 		clear: both;
 	}
 
+
+	/* search  */
+	.search {
+		width: 100%;
+		position: relative;
+		display: flex;
+	  }
+	  .wrap{
+  width: 30%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+	  .searchTerm {
+		width: 100%;
+		border: 3px solid #ed786a;
+		border-right: none;
+		padding: 5px;
+		height: 36px;
+		border-radius: 5px 0 0 5px;
+		outline: none;
+		color: #9DBFAF;
+	  }
+	  
+	  .searchTerm:focus{
+		color: #ed786a;
+	  }
+	  
+	  .searchButton {
+		width: 40px;
+		height: 36px;
+		border: 1px ;
+		padding: 0 0 0 0;
+		text-align: center;
+		border-radius: 0 5px 5px 0;
+		font-size: 20px;
+	  }
+
 /* grid  */
 .item1 { grid-area: name; }
 .item2 { grid-area: price; }
