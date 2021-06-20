@@ -4,7 +4,7 @@ function postObject(object){
         body:JSON.stringify(object) 
     }).then(resp => {
         if(resp.status === 400){
-            window.location.href = '../login.html';
+            window.location.href = './login.html';
             alert("Password or Username wrong!");
         }
         return resp.json();
@@ -12,13 +12,13 @@ function postObject(object){
         localStorage.setItem('email',data.email);
         localStorage.setItem('username',data.username);
         localStorage.setItem('isAdmin',data.isAdmin);
-        window.location.href = '../index.html';
+        window.location.href = './index.html';
     });
 }
 
 function main(){
     if(localStorage.getItem('email') !== null){
-        window.location.href = '../index.html';
+        window.location.href = './index.html';
     }
     let usr = document.getElementById('usr');
     let pass = document.getElementById('pass');

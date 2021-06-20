@@ -6,14 +6,14 @@ function updatePassowrd(object) {
     .then((resp) => {
       if (resp.status === 400) {
         alert("Email nout found!");
-        window.location.href = "../forgot.html";
+        window.location.href = "./forgot.html";
         return null;
       }
       return resp.json();
     })
     .then((data) => {
       if (data !== null) {
-        window.location.href = "../login.html";
+        window.location.href = "./login.html";
       }
     });
 }

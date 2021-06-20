@@ -13,15 +13,18 @@ app.get("/be/api/users", async (req, res) => {
     res.send({ status: "DB Error: Can't find the database" });
   }
 });
-app.get("/be/api/perfumes", async (req, res) => {
-  if (db !== null) {
-    await db.setCollection("Products");
-    res.send(await db.queryAll());
-  } else {
-    res.setStatusCode(400);
-    res.send({ status: "DB Error: Can't find the database" });
-  }
+
+ app.get("/be/api/perfumes",async (req,res)=>{
+      if (db!==null){
+          await db.setCollection("Products");
+          res.send(await db.queryAll());
+        }
+        else{
+          res.setStatusCode(400);
+          res.send({status:"DB Error: Can't find the database"});
+        }
 });
+
 app.post("/be/api/register", async (req, res) => {
   await db.setCollection("Users");
   console.log(req.body);
@@ -72,6 +75,47 @@ app.post("/be/api/admin/register", async (req, res) => {
     res.send({ status: "Admin already exists!" });
   }
 });
+app.get("/be/api/perfume/:id", async (req, res) => {
+  await db.setCollection("Products");
+  console.log(req.pathParams["id"]);
+  var query = { _id: mongodb.ObjectId(req.pathParams["id"])  };
+  var product = await db.query(query); 
+  
+  if(product!== null){
+    res.setStatusCode(200);
+    res.send(product);
+  }
+  else{
+    res.setStatusCode(400);
+    res.send({status:"Couldn't find the product :("});
+  }
+});
+
+app.get("/be/api/searchPerfumes/:id",async (req,res)=>{
+  if (db!=null){
+    await db.setCollection("Products");
+    var queryString =decodeURI(req.pathParams["id"]);
+    //probably not the smartest Search API
+    var query = { "name": queryString};
+    var query2 = { name: { $regex : ".*"+ queryString +".*", $options:'i' } };
+    var query3 ={ name: { $regex :  queryString +".*", $options:'i' } };
+    var query4 = { name: { $regex : ".*"+ queryString , $options:'i' } };
+    
+    var product = await db.queryAll(query3||query4||query2||query);
+    if(product!== null){
+      res.setStatusCode(200);
+      res.send(product);
+    }
+    else{
+      res.setStatusCode(404);
+      res.send({status:"Couldn't find the product :("});
+    }
+  }
+  else {
+    res.setStatusCode(400);
+    res.send({status:"Server error :("});
+  }
+});
 
 app.get("/be/api/stats/:format", async (req, res) => {
   await db.setCollection("Users");
@@ -95,21 +139,25 @@ app.get("/be/api/stats/:format", async (req, res) => {
 //   });
 // }
 
-app.post("/be/api/addPerfume", async (req, res) => {
-  if (db !== null) {
-    await db.setCollection("Products");
-    var RandomObject = {
-      picture: "http://placehold.it/32x32",
-      isActive: true,
-      price: "$" + Math.floor(Math.random() * 250 + 50),
-      stockAvaliability: Math.floor(Math.random() * 500 + 1),
-      name: req.body.name,
-      popularity: Math.floor(Math.random() * 10 + 1),
-      dateAdded: Date.now(),
+app.post("/be/api/addPerfume",async (req,res)=>{
+ 
+  if (db!==null){
+      await db.setCollection("Products");
+      var ReqObject = {
+        picture: "http://placehold.it/32x32",
+        isActive: true,
+        price: req.body.price,
+        stockAvaliability: req.body.stockAvaliability,
+        name: req.body.name,
+        designer: req.body.designer,
+        popularity: 8,   //start with basic popularity of 8/10
+        dateAdded:  Date.now(),
+       
+        tags: req.body.tags
+    } ;
+      await db.insertObject(ReqObject);
 
-      tags: ["culpa", "sit", "esse"],
-    };
-    await db.insertObject(RandomObject);
+ 
 
     res.setStatusCode(200);
 
@@ -120,19 +168,6 @@ app.post("/be/api/addPerfume", async (req, res) => {
   }
 });
 
-app.get("/be/api/perfume/:id", async (req, res) => {
-  await db.setCollection("Products");
-  var query = { _id: mongodb.ObjectId(req.pathParams["id"]) };
-  var product = await db.query(query);
-
-  if (product !== null) {
-    res.setStatusCode(200);
-    res.send(product);
-  } else {
-    res.setStatusCode(400);
-    res.send({ status: "Couldn't find the product :(" });
-  }
-});
 
 app.listen(port, async () => {
   await db.setUpConnection("PerMa");

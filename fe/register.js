@@ -4,19 +4,19 @@ function postUser(obj){
         body:JSON.stringify(obj)
     }).then(resp => {
         if(resp.status === 400){
-            window.location.href = '../register.html';
+            window.location.href = './register.html';
             alert('User already exists!');
         }
         return resp.json();
     }).then(data => {
         console.log(data);
-        window.location.href = '../login.html';
+        window.location.href = './login.html';
     });
 }
 
 function main(){
     if(localStorage.getItem('email') !== null){
-        window.location.href = '../index.html';
+        window.location.href = './index.html';
     }
     let lstName = document.getElementsByClassName('last-name')[0];
     let frstName = document.getElementsByClassName('first-name')[0];
