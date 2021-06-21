@@ -1,8 +1,13 @@
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://localhost:27017";
-const client = new MongoClient(uri, { useUnifiedTopology: true });
+const uri = "mongodb+srv://MakeTheGrade:HDB07abc@permacluster.jiotd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+client.connect(err => {
+    const collection = client.db("PerMa").collection("Users");
+    //console.log(collection);
+    //client.close();
+  });
 exports.DatabaseHandler = ()=>{
     let db = undefined;
     let collection = undefined;

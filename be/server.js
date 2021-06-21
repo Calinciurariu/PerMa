@@ -6,7 +6,11 @@ const app = App();
 
 app.get("/be/api/users", async (req, res) => {
   if (db !== null) {
+    console.log("called get on all users");
+
     await db.setCollection("Users");
+    res.setStatusCode(200);
+
     res.send(await db.queryAll());
   } else {
     res.setStatusCode(400);
@@ -17,6 +21,8 @@ app.get("/be/api/users", async (req, res) => {
  app.get("/be/api/perfumes",async (req,res)=>{
       if (db!==null){
           await db.setCollection("Products");
+          res.setStatusCode(200);
+
           res.send(await db.queryAll());
         }
         else{

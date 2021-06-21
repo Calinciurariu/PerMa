@@ -1,7 +1,7 @@
 
 var mainSearchBar = document.getElementsByClassName("searchTerm");
 var mainSearchButton = document.getElementsByClassName("searchButton");
-var searchString="oud";
+var searchString="";
 mainSearchBar[0].addEventListener("keyup", function(event) {
     searchString = mainSearchBar[0].value ;
     if (event.keyCode === 13) { //13 = enter
