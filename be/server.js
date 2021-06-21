@@ -18,6 +18,54 @@ app.get("/be/api/users", async (req, res) => {
   }
 });
 
+app.get("/be/api/shipment/:id", async (req, res) => {
+  await db.setCollection("Shipments");
+  console.log(req.pathParams["id"]);
+  var query = { _id: req.pathParams["id"]  };
+  var product = await db.query(query); 
+  
+  if(product!== null){
+    res.setStatusCode(200);
+    res.send(product);
+  }
+  else{
+    res.setStatusCode(400);
+    res.send({status:"Couldn't find it. Sorry :("});
+  }
+});
+
+
+app.get ("/be/api/deliveries/:id", async (req,res)=>{
+
+  await db.setCollection("Shipments");
+  console.log(req.pathParams["id"]);
+  var query = { shipmentsUsername:req.pathParams["id"] };
+  var product = await db.queryAll(query); 
+  
+  if(product!== null){
+    res.setStatusCode(200);
+    res.send(product);
+  }
+  else{
+    res.setStatusCode(400);
+    res.send({status:"Couldn't find anything. Perhaps the username is wrong?"});
+  }
+
+});
+
+app.get("/be/api/shipments",async (req,res)=>{
+  if (db!==null){
+      await db.setCollection("Shipments");
+      res.setStatusCode(200);
+
+      res.send(await db.queryAll());
+    }
+    else{
+      res.setStatusCode(400);
+      res.send({status:"DB Error: Can't find the database"});
+    }
+});
+
  app.get("/be/api/perfumes",async (req,res)=>{
       if (db!==null){
           await db.setCollection("Products");
@@ -47,7 +95,7 @@ app.post("/be/api/login", async (req, res) => {
   await db.setCollection("Users");
     console.log(req.body);
   //   console.log(await db.query(req.body));
-  console.log(await db.query({username:'mikihash'}));
+ // console.log(await db.query({username:'mikihash'}));
   if (await db.query(req.body) !== null) {
     res.setStatusCode(200);
     res.send(await db.query(req.body));
@@ -106,8 +154,14 @@ app.get("/be/api/searchPerfumes/:id",async (req,res)=>{
     var query2 = { name: { $regex : ".*"+ queryString +".*", $options:'i' } };
     var query3 ={ name: { $regex :  queryString +".*", $options:'i' } };
     var query4 = { name: { $regex : ".*"+ queryString , $options:'i' } };
-    
-    var product = await db.queryAll(query3||query4||query2||query);
+
+    var authorQuery = { "designer": queryString};
+    var authorQuery2 = { designer: { $regex : ".*"+ queryString +".*", $options:'i' } };
+    var authorQuery3 ={ designer: { $regex :  queryString +".*", $options:'i' } };
+    var authorQuery4 = { designer: { $regex : ".*"+ queryString , $options:'i' } };
+  //  var product = await db.queryAll(query3||query4||query2||authorQuery||authorQuery2||authorQuery3||authorQuery4||query);
+    var product = await db.queryAll( {$or: [query3,query4,query2,authorQuery,authorQuery2,authorQuery3,authorQuery4,query]} );
+
     if(product!== null){
       res.setStatusCode(200);
       res.send(product);

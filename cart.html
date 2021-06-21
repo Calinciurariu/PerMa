@@ -19,8 +19,6 @@
 		<section id="header">
 			<div class="container">
 
-				<!-- Logo -->
-				<h1 id="logo"><a>admin panel</a></h1>
 
 				<!-- Nav -->
 				<nav id="nav">
@@ -57,9 +55,7 @@
 
 
 					<ul id="controls">
-						<li><a class="icon solid fa-heart loggedin" id="wish" href="right-sidebar.html"><span>Wishlist</span></a></li>
 						<li><a class="icon solid fa-heart loggedin" id="profile" href="right-sidebar.html"><span>Profile</span></a></li>
-						<!-- <li><a class="icon solid fa-heart loggedin" id="admin" href=""><span>ADMIN</span></a></li> -->
 						<li><a class="icon solid fa-user-circle loggedoff" id="login" href="login.html"><span>Login</span></a></li>
 						<li><a class="icon solid fa-sign-out-alt loggedoff" id="logout" href="login.html"><span>Logout</span></a></li>
 						<li><a class="icon solid fa-user-circle loggedin" id="register" href="register.html"><span>Register</span></a></li>
@@ -72,51 +68,24 @@
 
         <section id="features">
 			<div >
-				<h2 id="logo" >Shop Report</h2>
-
-				<div id="projectReport" class="reportSection">
-					<div class="fullWidth">
-						<div class="projectFactsWrap ">
-							<div class="item" >
-								<p id="number1">12</p>
-								<span></span>
-								<p>Users on this site</p>
-							</div>
-							<div class="item">
-								<p id="number2" >55</p>
-								<span></span>
-								<p>Perfumes available</p>
-							</div>
-							<div class="item"  >
-								<p id="number3" >359</p>
-								<span></span>
-								<p>Products already sold of which</p>
-							</div>
-							 <div class="item"  >
-								<p id="number3" style="color:gold">34</p>
-								<span></span>
-								<p >Already recieved by clients</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<button type="button" id="logo" class="collapsible">Customers </button>
-				<div class="collapsibleContent">
-						<ul id="customerslist">
-						</ul>
-				</div>
-				<button type="button" id="logo" class="collapsible">Perfumes </button>
-				<div class="collapsibleContent">
-					<ul id="perfumeslist">
-					</ul>
-				</div>
-				<button type="button" id="logo" class="collapsible">Shippings</button>
-				<div class="collapsibleContent">
-					<ul id="shippingslist">
-					</ul>
-				</div>
-
+				<ul>
+                    <li>
+                        <div style="display: inline-block;">
+                            <img  alt="https://via.placeholder.com/430x290" src="https://via.placeholder.com/130x60"/>
+                            <div>
+                                 <p> 
+                                        Nume
+                                </p>
+                                <p> 
+                                        Pret
+                                </p>
+                            </div>
+                            <button class="deleteButton"> STERGE </button>
+                        </div>
+                        <hr>
+                    </li>
+                </ul>
+			
 			</div>
         </section>
 		<section>
@@ -127,31 +96,10 @@
 		
 	</div>
 
-	<!-- <script src="assets/js/jquery.min.js"></script>  -->
-	 <script src="assets/js/util.js"></script> 
-	<!-- <script src="assets/js/main.js"></script> -->
+
 	<script src="fe/index.js"></script>
-	<script src="fe/admin.js"></script>
+	<script src="fe/cart.js"></script>
 
-	<script>
-		var coll = document.getElementsByClassName("collapsible");
-		var i;
-		console.log(coll);
-		for (i = 0; i < coll.length; i++) {
-		  coll[i].addEventListener("click", function() {
-			this.classList.toggle("active");
-			var content = this.nextElementSibling;
-			if (content.style.display === "block") {
-			  content.style.display = "none";
-			  this.style.background="gray";
-
-			} else {
-			  content.style.display = "block";
-			  this.style.background="#ed786a";
-			}
-		  });
-		}
-		</script>
 </body>
 
 </html>
