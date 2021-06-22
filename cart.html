@@ -56,9 +56,7 @@
 
 					<ul id="controls">
 						<li><a class="icon solid fa-heart loggedin" id="profile" href="right-sidebar.html"><span>Profile</span></a></li>
-						<li><a class="icon solid fa-user-circle loggedoff" id="login" href="login.html"><span>Login</span></a></li>
 						<li><a class="icon solid fa-sign-out-alt loggedoff" id="logout" href="login.html"><span>Logout</span></a></li>
-						<li><a class="icon solid fa-user-circle loggedin" id="register" href="register.html"><span>Register</span></a></li>
 					</ul>
 				</nav>
 
@@ -70,8 +68,9 @@
 			<div >
 				<ul>
                     <li>
-                        <div style="display: inline-block;">
-                            <img  alt="https://via.placeholder.com/430x290" src="https://via.placeholder.com/130x60"/>
+                        <div style="display: flex; align-items: center; height: 50px;
+                        justify-content: center;">
+                            <img  alt="https://via.placeholder.com/430x290" src="https://via.placeholder.com/130x60" />
                             <div>
                                  <p> 
                                         Nume
@@ -89,9 +88,7 @@
 			</div>
         </section>
 		<section>
-            <button id="csv" style="margin-left: 45%; margin-top: 5px; margin-bottom: 10px;">Download CSV</button>
-			<br/>
-			<button id="txt" style="margin-left: 45%; margin-top: 5px;">Download PDF</button>
+            <button onclick="SendCommand()" style="margin-left: 45%; margin-top: 5px; margin-bottom: 10px;">COMANDA</button>
         </section>
 		
 	</div>

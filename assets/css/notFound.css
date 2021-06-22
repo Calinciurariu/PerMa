@@ -1,0 +1,38 @@
+*{
+    transition: all 0.55s;
+}
+
+html {
+    height: 100%;
+}
+
+body{
+    font-family: 'Helvetica', sans-serif;
+    color: rgb(238, 167, 167);
+    margin: 0;
+}
+
+#mainStack{
+    text-align: center;
+
+    display: table;
+    width: 100%;
+    height: 100vh;
+}
+
+.display{
+	  display: table-cell;
+	  vertical-align: middle;
+}
+
+.display h1{
+    padding: 5px;
+	  font-size: 75px;
+	  display: inline-block;
+	  animation: type .5s alternate infinite;
+}
+
+@keyframes type{
+	  from{box-shadow: inset 0px 0px 0px rgb(2, 2, 2);}
+	  to{box-shadow: inset -3px 0px 0px rgb(2, 2, 2);}
+}

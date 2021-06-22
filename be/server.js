@@ -79,6 +79,19 @@ app.get("/be/api/shipments",async (req,res)=>{
         }
 });
 
+app.get("/be/api/newestPerfumes",async (req,res)=>{
+  if (db!==null){
+      await db.setCollection("Products");
+      res.setStatusCode(200);
+
+      res.send(await db.queryLastN());
+    }
+    else{
+      res.setStatusCode(400);
+      res.send({status:"DB Error: Can't find the database"});
+    }
+});
+
 app.post("/be/api/register", async (req, res) => {
   await db.setCollection("Users");
   console.log(req.body);
@@ -94,8 +107,6 @@ app.post("/be/api/register", async (req, res) => {
 app.post("/be/api/login", async (req, res) => {
   await db.setCollection("Users");
     console.log(req.body);
-  //   console.log(await db.query(req.body));
- // console.log(await db.query({username:'mikihash'}));
   if (await db.query(req.body) !== null) {
     res.setStatusCode(200);
     res.send(await db.query(req.body));
