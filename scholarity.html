@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MUP Raport Scholarly HTML</title>
+</head>
+
+
+<body>
+    <header>
+        <h1 style="color:rgb(126, 31, 126)">MUP Scholarly HTML</h1>
+    </header>
+
+    <section typeof="sa:AuthorsList">
+        <h3>Authors</h3>
+        <ul>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person" resource="">
+                    <meta property="schema:givenName" content="Calin">
+                    <meta property="schema:familyName" content="Ciurariu">
+                    <span property="schema:name">Calin Ciurariu</span>
+                <meta property="schema:givenName" content="Circu">
+                <meta property="schema:familyName" content="Vlad">
+                <span property="schema:name">Circu Vlad</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="calin.ciurariu@gmail.com" property="schema:email">calin.ciurariu@gmail.com</a>
+                    </li>
+                </ul>
+                <span typeof="schema:Person" resource="">
+                    <meta property="schema:givenName" content="Circu">
+                    <meta property="schema:familyName" content="Vlad">
+                    <span property="schema:name">Circu Vlad</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="circuvlad98@gmail.com" property="schema:email">circuvlad98@gmail.com</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section typeof="sa:Abstract">
+        <h2 style="color:rgb(126, 31, 126)">1. Abstract</h2>
+        PerMa este o aplicatie de tipul magazin online de parfumuri. Aceasta aplicatie permite utilizatorului sa isi creeze un cont si sa cumpere dintr-o selectie de produse, acesta poate vizualiza produse. Totodata exista si un test pe care utilizatorul il poate
+        folosi pentru a gasi un produs mai potrivit pentru acesta. Este si o parte de admin, acesta este un al-2-lea tip de utilizator care poate sa verifice stocul de produse curent.
+    </section>
+
+    <section typeof="sa:Introduction">
+        <h2 style="color:rgb(126, 31, 126)">2. Introduction</h2>
+        In momentul de fata, cumparatul online a devenit deja o normalitate in majoritatea cazurilor. Oricum, in ceea ce priveste industria de parfumuri, exista deja ceva timp de cand oamenii aleg sa cumpere parfumuri prin diverse platforme de vendorship, deoarece
+        nu sunt atat de multe magazine care sa lucreze cu distribuitori mai interesanti sau exotici. Asadar, in final, o platforma pentru vanzarea si distribuirea de parfumuri se plaseaza intr-o nisa proprie si garanteaza interesul clientilor.
+    </section>
+
+    <section typeof="sa:Structure">
+        <h2 style="color:rgb(126, 31, 126)">3. Structure</h2>
+        Structura platformei este bazata pe modelul bine cunoscut, MVC(Model-view-controller), ce este un model arhitectural. Succesul modelului se datoreaza izolarii logicii de bussines fata de considerentele interfetei cu utilizatorul, rezultand o aplicatie
+        unde aspectul vizual sau/ si nivelele inferioare ale regulilor de bussines sunt mai usor de modificat, fara a afecta alte nivele. Pe langa MVC, elementul controlor(API) este accesat prin AJAX, prescurtarea pentru Asynchronous JavaScript and XML.
+        Fiind o tehnica de programare pentru crearea de aplicatii web interactive rapide. O structurare in profunzime a aplicatiei sunt prezentate in sectiunile urmatoare.
+    </section>
+
+    <section typeof="sa:appcomponents">
+        <h3>Componentele Aplicatiei</h3>
+        <ul>
+            <li property="schema: frontEnd">
+                <u>1. Front-End</u>
+                <br> Front-End-ul se refere la toata partea de client ce cuprinde html/css/javascript unde gasim tot ce inseamna structura si aspectul paginilor web. Folosim AJAX pentru a modifica paginile fara a intrerupe interactiunea pentru utilizator.
+                Site-ul avand ca scop prezentarea unor produse, datele sunt trimise si primite constant la server.
+                <br />
+                <br>
+            </li>
+
+            <li property="schema: Server">
+                <u>2. Server</u>
+                <br> Partea de server este scrisa in NodeJs folosind modulul http al limbajului. Avem un server REST simplu, care expune o serie de rute, acestea sunt grupate in functie de metoda de apelare. Avem o functie utilitara care construieste
+                un raspuns dat bazat pe datele primite si pe datele extrase din baza de date. Utilizam modulul http, dar impachetat intr-un modul scris de noi, care este in sine o clona de express js. Modulul ne ofera o parte din functionalitatile cele
+                mai importante ale framework-ului express, de la modalitatea simpla de a defini endpoint-uri pana la cateva utilitare care extrag path parameters si query parameters pentru noi, dar construiesc si body-ul, procesand octet stream-ul care
+                vine by default.
+                <br />
+                <br>
+            </li>
+
+            <li property="schema: dataHandler">
+                <u>3. Data Handler</u>
+                <br> Partea de management a bazei da date. Baza de date utilizata este de tipul mongoDB. Utilizam API-ul node js pentru executia instructiunilor pe o bazele de date de tipul mongoDB. Avem un handler generic deoarece mongodb ne permite
+                sa lucram cu obiecte de orice forma, o flexibilitate aparte care este si principalul avantaj al MongoDb.
+                <br />
+                <br>
+            </li>
+
+        </ul>
+    </section>
+
+
+    <h4>Sistem de gestionare a codului sursa</h4>
+    <h5>GitHub</h5>
+    Gestionarea codului sursa este facuta cu ajutorul git-ului, solutia git aleasa este GitHub.
+
+
+    <section typeof="sa:ReferencesList">
+        <h4>Referinte</h4>
+        <ul>
+            <li property="schema:linkReferences" typeof="schema:References">
+                <a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html" property="schema:linkTW">Pagina
+                    Cursului</a>
+            </li>
+            <li property="schema:linkReferences" typeof="schema:References">
+                <a href="https://www.w3schools.com/" property="schema:linkTW">W3School</a>
+            </li>
+        </ul>
+    </section>
+</body>
+
+</html>
