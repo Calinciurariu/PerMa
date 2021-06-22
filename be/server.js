@@ -79,7 +79,7 @@ app.get("/be/api/shipments",async (req,res)=>{
         }
 });
 
-app.get("/be/api/newestPerfumes",async (req,res)=>{
+app.get("/be/api/newest",async (req,res)=>{
   if (db!==null){
       await db.setCollection("Products");
       res.setStatusCode(200);
@@ -189,18 +189,30 @@ app.get("/be/api/searchPerfumes/:id",async (req,res)=>{
 });
 
 app.get("/be/api/stats/:format", async (req, res) => {
-  await db.setCollection("Users");
+  await db.setCollection("Products");
+  var rep = [];
+  rep= await db.queryAll();
+
   let format = req.pathParams["format"];
   if (format === "csv") {
-    let content = "Name,Stock\n";
-    for (let i = 0; i < 10; i++) {
-      content += "Name " + i + "," + Math.random() * 10 + "\n";
-    }
+    let content = "Name,Stock,Designer,Popularity,Price\n";
+    rep.forEach(element => {
+      content += element.name + "," + element.stockAvaliability+"," +element.designer+"," +element.popularity+"," +element.price+ "\n";
+
+    });
+ 
+
+   
+
+    res.setStatusCode(200);
+res.send(content)
+
   } else {
     res.setStatusCode(200);
     res.send([]);
   }
 });
+
 
 //we didn't need uuidv anymore. We thought about having a GUID for each product/user
 // function uuidv4() {

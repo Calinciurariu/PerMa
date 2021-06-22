@@ -1,7 +1,9 @@
 
+var prodList = [];
 var mainSearchBar = document.getElementsByClassName("searchTerm");
 var mainSearchButton = document.getElementsByClassName("searchButton");
 var searchString="";
+
 mainSearchBar[0].addEventListener("keyup", function(event) {
     searchString = mainSearchBar[0].value ;
     if (event.keyCode === 13) { //13 = enter
@@ -19,8 +21,25 @@ window.location.href = './notFound.html';
 return response.json();
       }).then(data=>
           {
+
+            var docs = document.getElementsByClassName("toAppend");
+//clearing the ul first
+Array.from(docs).forEach((el) => {
+    el.innerHTML ='';
+});
+
               console.log(data);
-              //populate lists
+
+              prodList = data;
+              prodList.forEach(element => {
+                var temp = document.getElementById("tmplt");
+                var clone = temp.content.cloneNode(true);
+                var b = clone.querySelectorAll("b");
+b[0].innerText = element.price
+                docs[0].appendChild(clone);
+              });
+           
+
           }
       );
   };
