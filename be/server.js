@@ -83,7 +83,7 @@ app.get("/be/api/newest",async (req,res)=>{
   if (db!==null){
       await db.setCollection("Products");
       res.setStatusCode(200);
-      res.send(await db.queryLastN());
+      res.send(await db.queryLastN({isActive: true}));
     }
     else{
       res.setStatusCode(400);

@@ -43,29 +43,51 @@ function downloadTxt(file, text, format) {
 
 function main() {
   checkIfLogged();
-  // let slices = window.location.href.split("/");
-  // if (slices[3] === "admin.html") {
-  //   let txtBtn = document.getElementById("txt");
-  //   txtBtn.addEventListener("click", () => {
-  //     fetch("http://localhost:8095/be/api/stats/txt")
-  //       .then((resp) => resp.json())
-  //       .then((data) => {
-  //         let content = JSON.stringify(data);
-  //         let fname = "GFG.txt";
-  //         downloadTxt(fname, content, "txt");
-  //       });
-  //   });
-  //   let csvBtn = document.getElementById("csv");
-  //   csvBtn.addEventListener("click", () => {
-  //     fetch("http://localhost:8095/be/api/stats/csv")
-  //       .then((resp) => resp.json())
-  //       .then((data) => {
-  //         let content = data.data;
-  //         let fname = "GFG.csv";
-  //         downloadTxt(fname, content, "csv");
-  //       });
-  //   });
-  // }
-}
+  if (window.location.href === './singleProduct.html')
+  {
+  fetch ('http://localhost:8095/be/api/newest',{method: 'GET'}).then (response =>{
 
+        if (response.status===400 || response.status ===404)
+        window.location.href = './notFound.html';
+        return response.json();
+              }).then(data=>
+                  {
+var p1 = document.getElementById("p1price");
+p1.innerText = data[0].price+ " €";
+ p1 = document.getElementById("p1name");
+p1.innerText = data[0].designer+ " - "+data[0].name;
+var p1 = document.getElementById("p1pic");
+p1.src = data[0].picture;
+p1.onclick = function() { 
+  GoToProduct(data[0]._id)}
+var p2 = document.getElementById("p2price");
+p2.innerText = data[1].price+ " €";
+ p2 = document.getElementById("p2name");
+ p2.innerText = data[1].designer+ " - "+data[1].name;
+var p2 = document.getElementById("p2pic");
+p2.src = data[1].picture;
+p2.onclick = function() { 
+  GoToProduct(data[1]._id)}
+var p3 = document.getElementById("p3price");
+p3.innerText = data[2].price+ " €";
+p3 = document.getElementById("p3name");
+p3.innerText = data[2].designer+ " - "+data[2].name;
+var p3 = document.getElementById("p3pic");
+p3.src = data[2].picture;
+
+p3.onclick = function() { 
+  GoToProduct(data[2]._id)
+}
+}
+);}
+}
+function GoToProduct(idString)
+{
+
+  if (idString!==null)
+  {
+  localStorage.setItem('quizPerfume',idString);
+ window.location.href = './singleProduct.html';
+  }
+}
 main();

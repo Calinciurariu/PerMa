@@ -31,11 +31,16 @@ Array.from(docs).forEach((el) => {
               console.log(data);
 
               prodList = data;
-              prodList.forEach(element => {
+              prodList.forEach(data => {
                 var temp = document.getElementById("tmplt");
                 var clone = temp.content.cloneNode(true);
                 var b = clone.querySelectorAll("b");
-b[0].innerText = element.price
+                b[0].innerText = data.price+ " €";
+                var bh = clone.querySelectorAll("h3");
+                bh[0].innerText = data.designer + '-' + data.name;
+                var ih = clone.querySelectorAll("img");
+                ih[0].src = data.picture;
+                var b = clone.querySelectorAll("b");
                 docs[0].appendChild(clone);
               });
            

@@ -11,20 +11,30 @@ function mainf()
         return response.json();
               }).then(data=>
                   {
-        
                     var docs = document.getElementsByClassName("toAppend");
-        //clearing the ul first
-        Array.from(docs).forEach((el) => {
-            el.innerHTML ='';
-        });
+                 //clearing the ui first
+                  Array.from(docs).forEach((el) => {
+                      el.innerHTML ='';
+                     });
         var temp = document.getElementById("tmplt");
         var clone = temp.content.cloneNode(true);
         var b = clone.querySelectorAll("b");
-b[0].innerText = data.price+ " €";
-var bh = clone.querySelectorAll("h3");
-bh[0].innerText = data.designer + '-' + data.name;
-var ih = clone.querySelectorAll("img");
-ih[0].src = data.picture;
+        b[0].innerText = data.price+ " €";
+        var bh = clone.querySelectorAll("h3");
+        bh[0].innerText = data.designer + '-' + data.name;
+        var ih = clone.querySelectorAll("img");
+        ih[0].src = data.picture;
         docs[0].appendChild(clone);
-});}
+});
+var HrtEvent = document.getElementsByClassName("heart");
+console.log(HrtEvent);
+
+HrtEvent.onclick= function() { 
+    BuyProduct();
+}
+}
 mainf();
+function BuyProduct()
+{
+    console.log("called heart");
+}
