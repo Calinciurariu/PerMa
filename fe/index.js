@@ -43,7 +43,8 @@ function downloadTxt(file, text, format) {
 
 function main() {
   checkIfLogged();
-  if (window.location.href === './singleProduct.html')
+  console.log(window.location.href);
+  if (window.location.href === 'file:///D:/TW/ProiectTW/PerMa/index.html')
   {
   fetch ('http://localhost:8095/be/api/newest',{method: 'GET'}).then (response =>{
 
