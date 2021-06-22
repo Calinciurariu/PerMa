@@ -26,7 +26,7 @@ window.onload = function() {
         localStorage.setItem('customers',data);
         CustomersList= data;
         PopulateUsers();
-        document.getElementById("customersnr").innerText+= "How many customers are on Perfume Shop: "+CustomersList.length;
+        document.getElementById("number1").innerText+= CustomersList.length;
 
     });
 
@@ -46,6 +46,7 @@ window.onload = function() {
         ProductsList= data;
         localStorage.setItem('products',data);
         PopulateProducts();
+        document.getElementById("number2").innerText+= ProductsList.length;
 
      //   localStorage.setItem('shipments',data);
     });
@@ -66,6 +67,8 @@ window.onload = function() {
         ShipmentsList= data;
         localStorage.setItem('shipments',data);
         PopulateShipments();
+        document.getElementById("number3").innerText+= ShipmentsList.length;
+        document.getElementById("number4").innerText+= Math.floor(ShipmentsList.length/2) ;
 
     });
   }
@@ -129,6 +132,107 @@ function scrollFunction() {
   }
 }
 function topFunction() {
+  //  console.log("went up");
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
+}
+function DownloadPDF() {
+   
+    fetch('http://localhost:8095/be/api/stats/csv',{
+        method:'GET',
+    }).then(resp => {
+
+        if(resp.status === 400)
+        {
+            window.location.href = './BadRequest.html';
+        }
+        else if (resp.status === 404)
+        {
+            window.location.href = './notFound.html';
+        }
+        return resp.json();
+    }).then(data => {
+
+        saveTextAsFilePDF(data);
+
+    });
+  }
+  function DownloadCSV() {
+    fetch('http://localhost:8095/be/api/stats/csv',{
+        method:'GET',
+    }).then(resp => {
+        if(resp.status === 400)
+        {
+            window.location.href = './BadRequest.html';
+        }
+        else if (resp.status === 404)
+        {
+            window.location.href = './notFound.html';
+        }
+        return resp.json();
+    }).then(data => {
+        saveTextAsFileCSV(data);
+
+    });
+   
+  }
+
+  function saveTextAsFileCSV(textToWrite)
+{
+	var textFileAsBlob = new Blob([textToWrite], {type:'text/csv'});
+
+	var downloadLink = document.createElement("a");
+	downloadLink.download = "report.csv";
+	downloadLink.innerHTML = "Download File";
+	if (window.webkitURL != null)
+	{
+		// Chrome allows the link to be clicked
+		// without actually adding it to the DOM.
+		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	}
+	else
+	{
+		// Firefox requires the link to be added to the DOM
+		// before it can be clicked.
+		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+		downloadLink.onclick = destroyClickedElement;
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
+	}
+
+	downloadLink.click();
+}
+
+function saveTextAsFilePDF(textToWrite)
+{
+	// var textFileAsBlob = new Blob([textToWrite], {type:'application/pdf'});
+
+	// var downloadLink = document.createElement("b");
+	// downloadLink.download = "report.pdf";
+	// downloadLink.innerHTML = "Download File";
+	// if (window.webkitURL != null)
+	// {
+	// 	// Chrome allows the link to be clicked
+	// 	// without actually adding it to the DOM.
+	// 	downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	// }
+	// else
+	// {
+	// 	// Firefox requires the link to be added to the DOM
+	// 	// before it can be clicked.
+	// 	downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+	// 	downloadLink.onclick = destroyClickedElement;
+	// 	downloadLink.style.display = "none";
+	// 	document.body.appendChild(downloadLink);
+	// }
+
+	// downloadLink.click();
+    var byteNumbers = new Array(textToWrite.length);
+for (var i = 0; i < textToWrite.length; i++) {
+  byteNumbers[i] = textToWrite.charCodeAt(i);
+}
+var byteArray = new Uint8Array(byteNumbers);
+var file = new Blob([byteArray], { type: 'application/pdf;base64' });
+var fileURL = URL.createObjectURL(file);
+window.open(fileURL);
 }

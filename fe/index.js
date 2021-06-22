@@ -43,29 +43,29 @@ function downloadTxt(file, text, format) {
 
 function main() {
   checkIfLogged();
-  let slices = window.location.href.split("/");
-  if (slices[3] === "admin.html") {
-    let txtBtn = document.getElementById("txt");
-    txtBtn.addEventListener("click", () => {
-      fetch("http://localhost:8095/be/api/stats/txt")
-        .then((resp) => resp.json())
-        .then((data) => {
-          let content = JSON.stringify(data);
-          let fname = "GFG.txt";
-          downloadTxt(fname, content, "txt");
-        });
-    });
-    let csvBtn = document.getElementById("csv");
-    csvBtn.addEventListener("click", () => {
-      fetch("http://localhost:8095/be/api/stats/csv")
-        .then((resp) => resp.json())
-        .then((data) => {
-          let content = data.data;
-          let fname = "GFG.csv";
-          downloadTxt(fname, content, "csv");
-        });
-    });
-  }
+  // let slices = window.location.href.split("/");
+  // if (slices[3] === "admin.html") {
+  //   let txtBtn = document.getElementById("txt");
+  //   txtBtn.addEventListener("click", () => {
+  //     fetch("http://localhost:8095/be/api/stats/txt")
+  //       .then((resp) => resp.json())
+  //       .then((data) => {
+  //         let content = JSON.stringify(data);
+  //         let fname = "GFG.txt";
+  //         downloadTxt(fname, content, "txt");
+  //       });
+  //   });
+  //   let csvBtn = document.getElementById("csv");
+  //   csvBtn.addEventListener("click", () => {
+  //     fetch("http://localhost:8095/be/api/stats/csv")
+  //       .then((resp) => resp.json())
+  //       .then((data) => {
+  //         let content = data.data;
+  //         let fname = "GFG.csv";
+  //         downloadTxt(fname, content, "csv");
+  //       });
+  //   });
+  // }
 }
 
 main();

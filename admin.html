@@ -70,12 +70,14 @@
 		</section>
 
 		<section>
-            <button id="csv" onclick="DownloadCSV()" style="margin-left: 45%; margin-top: 10px; margin-bottom: 10px;">Download CSV</button>
+            <button id="csv" onclick="DownloadCSV()" style="margin-left: 45%; margin-top: 10px; margin-bottom: 10px;"> Download CSV</button>
 			<br/>
-			<button id="txt"   style="margin-left: 45%; margin-top: 10px;"><a href="./yourfile.pdf" download="newfilename" >Download PDF</a></button>
+			<button id="txt" onclick="DownloadPDF()"  style="margin-left: 45%; margin-top: 10px;">Download PDF</button>
         </section>
 
         <section id="features">
+			<button onclick="topFunction()" id="topButton" >Go up</button>
+
 			<div >
 				<h2 id="logo" >Shop Report</h2>
 
@@ -83,24 +85,24 @@
 					<div class="fullWidth">
 						<div class="projectFactsWrap ">
 							<div class="item" >
-								<p id="number1">12</p>
+								<p id="number1"></p>
 								<span></span>
 								<p>Users on this site</p>
 							</div>
 							<div class="item">
-								<p id="number2" >55</p>
+								<p id="number2" ></p>
 								<span></span>
 								<p>Perfumes available</p>
 							</div>
 							<div class="item"  >
-								<p id="number3" >359</p>
+								<p id="number3" ></p>
 								<span></span>
-								<p>Products already sold of which</p>
+								<p>Products already sold of which...</p>
 							</div>
 							 <div class="item"  >
-								<p id="number3" style="color:gold">34</p>
+								<p id="number4" style="color:gold"></p>
 								<span></span>
-								<p >Already recieved by clients</p>
+								<p >...Already recieved by clients</p>
 							</div>
 						</div>
 					</div>
@@ -108,17 +110,17 @@
 
 				<button type="button" id="logo" class="collapsible">Customers </button>
 				<div class="collapsibleContent">
-						<ul id="customerslist">
+						<ul class="mt-overflow-auto" id="customerslist">
 						</ul>
 				</div>
 				<button type="button" id="logo" class="collapsible">Perfumes </button>
 				<div class="collapsibleContent">
-					<ul id="perfumeslist">
+					<ul class="mt-overflow-auto" id="perfumeslist">
 					</ul>
 				</div>
 				<button type="button" id="logo" class="collapsible">Shippings</button>
 				<div class="collapsibleContent">
-					<ul id="shippingslist">
+					<ul class="mt-overflow-auto"  id="shippingslist">
 					</ul>
 				</div>
 
@@ -127,11 +129,8 @@
 	
 		
 	</div>
-	<button onclick="topFunction()" id="topButton" >Go up</button>
 
-	<!-- <script src="assets/js/jquery.min.js"></script>  -->
 	 <script src="assets/js/util.js"></script> 
-	<!-- <script src="assets/js/main.js"></script> -->
 	<script src="fe/index.js"></script>
 	<script src="fe/admin.js"></script>
 
@@ -141,6 +140,7 @@
 		console.log(coll);
 		for (i = 0; i < coll.length; i++) {
 		  coll[i].addEventListener("click", function() {
+			  
 			this.classList.toggle("active");
 			var content = this.nextElementSibling;
 			if (content.style.display === "block") {
