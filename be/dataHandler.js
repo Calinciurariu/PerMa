@@ -32,7 +32,7 @@ exports.DatabaseHandler = ()=>{
             return collection.findOne(obj);
         },
         queryLastN:async (obj)=>{
-            return await collection.find(obj).sort({_id: -1}).limit(3);
+            return await collection.find(obj).sort({_id: 1});
         },
         queryAll:async (obj)=>{
             return await collection.find(obj).toArray();

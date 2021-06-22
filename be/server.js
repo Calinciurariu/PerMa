@@ -83,7 +83,6 @@ app.get("/be/api/newest",async (req,res)=>{
   if (db!==null){
       await db.setCollection("Products");
       res.setStatusCode(200);
-
       res.send(await db.queryLastN());
     }
     else{
@@ -128,7 +127,42 @@ app.put("/be/api/updatePassword", async (req, res) => {
     res.send({ status: "User not found!" });
   }
 });
+app.put("/be/api/sellProduct/:id/:usr", async (req, res) => {
+  await db.setCollection("Products");
 
+  var dbresponse = await db.query({ _id: mongodb.ObjectId(req.pathParams["id"]) });
+  
+  if (dbresponse!==null) {
+  //  await db.updateAt(dbresponse.where, { stockAvaliability: dbresponse.stockAvaliability -1});
+    await db.updateAt({ "_id":mongodb.ObjectId(req.pathParams["id"])  },
+    { stockAvaliability: dbresponse.stockAvaliability-1 } , function  (err, d) {
+        if (err) return new Error(err);
+        if (d.result.n > 0) {
+          
+            console.log(" Invoice updated with payment info.", d.result);
+        } else {
+            console.log("Something went wrong while transacting.")
+        }
+});
+
+await db.setCollection("Shipments");
+var ReqObject = {
+  shipmentsUsername: req.pathParams["usr"],
+  productId : req.pathParams["id"],
+  status: "Not yet dispatched",
+  address: "",
+  isGift: true,   
+  date:  Date.now().toString()
+ };
+await db.insertObject (ReqObject);
+
+    res.setStatusCode(200);
+    res.send(ReqObject);
+  } else {
+    res.setStatusCode(400);
+    res.send({ status: "Couldn't find product!" });
+  }
+});
 app.post("/be/api/admin/register", async (req, res) => {
   await db.setCollection("Users");
   if ((await db.query({ email: req.body.email })) === null) {
